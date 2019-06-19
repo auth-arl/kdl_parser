@@ -2,16 +2,20 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(kdl_parser)
 
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../core/cmake/ ${CMAKE_MODULE_PATH} )
+set(EIGEN3_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../eigen3/)
+
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
 find_package(catkin REQUIRED
   COMPONENTS rosconsole urdf cmake_modules
 )
-find_package(orocos_kdl REQUIRED)
+
+find_package(orocos-kdl REQUIRED)
 find_package(TinyXML REQUIRED)
 
-include_directories(include ${orocos_kdl_INCLUDE_DIRS} ${TinyXML_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
+include_directories(include ${EIGEN3_INCLUDE_DIR} ${orocos-kdl_INCLUDE_DIR} ${TinyXML_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
 
 link_directories(${catkin_LIBRARY_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
@@ -19,15 +23,15 @@ link_directories(${Boost_LIBRARY_DIRS})
 add_compile_options(-std=c++11)
 
 catkin_package(
-  LIBRARIES ${PROJECT_NAME} ${orocos_kdl_LIBRARIES}
+  LIBRARIES ${PROJECT_NAME} ${orocos-kdl_LIBRARIES}
   INCLUDE_DIRS include
   CATKIN_DEPENDS rosconsole urdf
-  DEPENDS orocos_kdl TinyXML
+  DEPENDS orocos-kdl TinyXML
 )
 
 add_library(${PROJECT_NAME} src/kdl_parser.cpp)
 target_link_libraries(${PROJECT_NAME}
-  ${TinyXML_LIBRARIES} ${orocos_kdl_LIBRARIES} ${catkin_LIBRARIES}
+  ${TinyXML_LIBRARIES} ${orocos-kdl_LIBRARIES} ${catkin_LIBRARIES}
 )
 
 if(WIN32)
