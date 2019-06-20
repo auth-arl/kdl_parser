@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(kdl_parser)
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../core/cmake/ ${CMAKE_MODULE_PATH} )
-set(EIGEN3_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../eigen3/)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../core/cmake/ ${CMAKE_MODULE_PATH} )
+set(EIGEN3_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../eigen3/)
 
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
